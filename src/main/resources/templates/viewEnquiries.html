@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>View Enquiries</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background: #f4f7fa;
+			margin: 0;
+			padding-top: 70px;
+		}
+
+		.navbar {
+			position: fixed;
+			top: 0;
+			width: 95%;
+			background: #343a40;
+			color: white;
+			padding: 15px 30px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+			z-index: 999;
+		}
+
+		.navbar h1 {
+			margin: 0;
+			font-size: 22px;
+		}
+
+		.navbar-links a {
+			color: white;
+			text-decoration: none;
+			margin-left: 20px;
+			font-weight: bold;
+		}
+
+		.navbar-links a:hover {
+			text-decoration: underline;
+		}
+
+		h2 {
+			text-align: center;
+			margin-bottom: 20px;
+		}
+
+		.filter-form {
+			display: flex;
+			gap: 20px;
+			flex-wrap: wrap;
+			margin-bottom: 30px;
+			justify-content: center;
+		}
+
+		.filter-form select,
+		.filter-form button {
+			padding: 10px;
+			font-size: 16px;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			background: #fff;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		}
+
+		th,
+		td {
+			padding: 12px;
+			border: 1px solid #ddd;
+			text-align: center;
+		}
+
+		th {
+			background-color: #007bff;
+			color: white;
+		}
+	</style>
+</head>
+
+<body>
+
+	<!-- Navigation Bar -->
+	<div class="navbar">
+		
+		<h1>Enquiry Dashboard</h1>
+		
+		
+		<div class="navbar-links">
+			<a th:href="@{/dashboard}">Dashboard</a>
+			<a th:href="@{/enquiry-page}">Add Enquiry</a>
+			<a th:href="@{/logout}">Logout</a>
+		</div>
+	</div>
+	<h2>View Enquiries</h2>
+
+	<!-- Filter Form -->
+	<form class="filter-form" th:action="@{/filter-enquiries}" th:object="${filterDTO}" method="post">
+		<select name="classMode" th:field="*{classMode}">
+			<option value="">All Class Modes</option>
+			<option value="Online">Online</option>
+			<option value="Offline">Offline</option>
+		</select>
+
+		<select name="course" th:field="*{course}">
+			<option value="">All Courses</option>
+			<option value="Java">Java</option>
+			<option value="Python">Python</option>
+			<option value="DevOps">DevOps</option>
+		</select>
+
+		<select name="enqStatus" th:field="*{enqStatus}">
+			<option value="">All Status</option>
+			<option value="Open">Open</option>
+			<option value="Enrolled">Enrolled</option>
+			<option value="Lost">Lost</option>
+		</select>
+
+		<button type="submit">Filter</button>
+	</form>
+	<!-- Alert Messages -->
+			<div th:if="${IdNotFound}" class="alert alert-warning text-center">
+				<p th:text="${IdNotFound}"></p>
+			</div>
+
+			<div th:if="${notDeleted}" class="alert alert-warning text-center">
+				<p th:text="${notDeleted}"></p>
+			</div>
+
+			<div th:if="${deleted}" class="alert alert-danger text-center">
+				<p th:text="${deleted}"></p>
+			</div>
+
+	<!-- Enquiries Table -->
+	<table>
+		<thead>
+			<tr>
+				<th>Student Name</th>
+				<th>Phone</th>
+				<th>Class Mode</th>
+				<th>Course</th>
+				<th>Status</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="enq : ${enquiries}">
+				<td th:text="${enq.studentName}">Name</td>
+				<td th:text="${enq.studentPhno}">Phone</td>
+				<td th:text="${enq.classMode}">Mode</td>
+				<td th:text="${enq.course}">Course</td>
+				<td th:text="${enq.enqStatus}">Status</td>
+				<td><a class="text-primary" th:href="@{/edit-enquiry(enqId=${enq.enqId})}">Edit</a> /
+					<a c																																																					lass="text-danger" th:href="@{/delete-enquiry(enqId=${enq.enqId})}">Delete</a>
+				</td>
+			</tr>
+			<tr th:if="${#lists.isEmpty(enquiries)}">
+				<td colspan="5">No enquiries found.</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+
+</html>

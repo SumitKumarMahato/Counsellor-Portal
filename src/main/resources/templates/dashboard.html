@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fa;
+            margin: 0;
+            padding-top: 70px;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 95%;
+            background: #343a40;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            z-index: 999;
+        }
+
+        .navbar h1 {
+            margin: 0;
+            font-size: 22px;
+        }
+
+        .navbar-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+        }
+
+        .navbar-links a:hover {
+            text-decoration: underline;
+        }
+
+        .dashboard-title {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 30px;
+        }
+
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .card p {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .card.open { border-top: 4px solid #17a2b8; }
+        .card.enrolled { border-top: 4px solid #28a745; }
+        .card.lost { border-top: 4px solid #dc3545; }
+        .card.total { border-top: 4px solid #6c757d; }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <h1> Dashboard</h1>
+        <div class="navbar-links">
+            <a th:href="@{/enquiry-page}">Add Enquiry</a>
+            <a th:href="@{/view-enquiries}">View Enquiries</a>
+			<a th:href="@{/logout}">Logout</a>
+        </div>
+    </div>
+
+    <div class="dashboard-title">Welcome to Your Dashboard</div>
+
+    <div class="dashboard-container">
+
+        <div class="card total">
+            <h3>Total Enquiries</h3>
+            <p th:text="${dashboardDto.totalEnqCount}">0</p>
+        </div>
+
+        <div class="card open">
+            <h3>Open Enquiries</h3>
+            <p th:text="${dashboardDto.openEnqCount}">0</p>
+        </div>
+
+        <div class="card enrolled">
+            <h3>Enrolled Enquiries</h3>
+            <p th:text="${dashboardDto.enrolledEnqcount}">0</p>
+        </div>
+
+        <div class="card lost">
+            <h3>Lost Enquiries</h3>
+            <p th:text="${dashboardDto.lostEnqCount}">0</p>
+        </div>
+
+    </div>
+</body>
+</html>

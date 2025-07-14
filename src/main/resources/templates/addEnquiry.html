@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Add Enquiry</title>
+	<style>
+		body {
+		           font-family: Arial, sans-serif;
+		           background: #f4f7fa;
+		           margin: 0;
+		           padding-top: 70px;
+		       }
+
+		       .navbar {
+		           position: fixed;
+		           top: 0;
+		           width: 95%;
+		           background: #343a40;
+		           color: white;
+		           padding: 15px 30px;
+		           display: flex;
+		           justify-content: space-between;
+		           align-items: center;
+		           box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+		           z-index: 999;
+		       }
+
+		       .navbar h1 {
+		           margin: 0;
+		           font-size: 22px;
+		       }
+
+		       .navbar-links a {
+		           color: white;
+		           text-decoration: none;
+		           margin-left: 20px;
+		           font-weight: bold;
+		       }
+
+		       .navbar-links a:hover {
+		           text-decoration: underline;
+		       }
+
+		.form-container {
+			background: white;
+			padding: 30px;
+			border-radius: 10px;
+			box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+			width: 400px;
+		}
+
+		.form-container h2 {
+			text-align: center;
+			margin-bottom: 25px;
+		}
+
+		.form-container input[type="text"],
+		.form-container input[type="tel"],
+		.form-container select {
+			width: 100%;
+			padding: 10px;
+			margin-bottom: 16px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+		}
+
+		.form-container button {
+			width: 100%;
+			padding: 10px;
+			background: #007bff;
+			color: white;
+			border: none;
+			border-radius: 5px;
+			font-weight: bold;
+			cursor: pointer;
+		}
+
+		.form-container button:hover {
+			background: #0056b3;
+		}
+
+		.message {
+			text-align: center;
+			margin-top: 10px;
+		}
+
+		.error {
+			color: red;
+		}
+
+		.success {
+			color: green;
+		}
+	</style>
+</head>
+
+<body>	
+	<!-- Navigation Bar -->
+	   <div class="navbar">
+	       <h1>Enquiry Dashboard</h1>
+	       <div class="navbar-links">
+			<a th:href="@{/dashboard}">Dashboard</a>
+	           <a th:href="@{/view-enquiries}">View Enquiries</a>
+			   <a th:href="@{/logout}">Logout</a>
+	       </div>
+	   </div>
+	<div class="form-container">
+		<div class="message">
+			<p th:if="${smsg}" class="success" th:text="${smsg}"></p>
+			<p th:if="${emsg}" class="error" th:text="${emsg}"></p>
+		</div>
+		<h2>Add Enquiry</h2>
+		<form th:action="@{/add-enquiry}" th:object="${enquiry}" method="post">
+
+			<input type="text" th:field="*{studentName}" placeholder="Student Name" required />
+
+			<input type="tel" th:field="*{studentPhno}" placeholder="Phone Number" required />
+
+			<select th:field="*{classMode}" required>
+				<option value="">-- Select Class Mode --</option>
+				<option value="Online">Online</option>
+				<option value="Offline">Offline</option>
+			</select>
+
+			<select th:field="*{course}" required>
+				<option value="">-- Select Course --</option>
+				<option value="Java">Java</option>
+				<option value="Python">Python</option>
+				<option value="React">React</option>
+				<!-- Add more courses if needed -->
+			</select>
+
+			<select th:field="*{enqStatus}" required>
+				<option value="">-- Select Enquiry Status --</option>
+				<option value="Open">Open</option>
+				<option value="Enrolled">Enrolled</option>
+				<option value="Lost">Lost</option>
+			</select>
+
+			<button type="submit">Submit Enquiry</button>
+		</form>
+
+
+	</div>
+</body>
+
+</html>
