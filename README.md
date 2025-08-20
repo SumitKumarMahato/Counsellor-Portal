@@ -53,8 +53,7 @@ Mini-Project-1
 <h2>⚙ Setup Instructions</h2>
 
 ### 1️⃣ Clone the repository
-git clone https://github.com/ChaitanyaKhowal/CounselNet.git
-
+git clone https://github.com/SumitKumarMahato/Counsellor-Portal.git
 cd CounselNet
 
 ### 2️⃣ Configure MySQL Database
@@ -110,6 +109,6 @@ Open in browser: http://localhost:8080/
 
 <h2>👨‍💻 Author</h2>
 
-*Chaitanya Khowal*  
-📧 Email: [chaitanyakhowal8@gmail.com](mailto:chaitanyakhowal8@gmail.com)  
-🔗 LinkedIn: [linkedin.com/in/chaitanyakhowal](https://linkedin.com/in/chaitanyakhowal)
+*Sumit Kumar Mahato*  
+📧 Email: [sumitkumar.mahato982@gmail.com](mailto:sumitkumar.mahato982@gmail.com)  
+🔗 LinkedIn: [https://www.linkedin.com/in/sumitmahato01/](https://www.linkedin.com/in/sumitmahato01/)
